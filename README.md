@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [Stealth](http://unity3d.com/learn/tutorials/projects/stealth)
 =======
 
@@ -51,3 +52,6 @@ Congratulations on completing the Stealth tutorials. If you want to push yoursel
   - The Animator Controller - if Speed is no longer digital, we need to blend between walking and running.
   - If axis input alone can determine how fast we’re moving, do we still need a sneak parameter?
   - If we don’t have a sneak parameter, how do we know when the enemies can hear footsteps and when they can’t?
+=======
+# mgsz-mobile
+>>>>>>> d2bf2900874169f80b93e761588a27cd39619e34
