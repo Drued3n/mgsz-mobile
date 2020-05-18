@@ -19,7 +19,12 @@ public class DoneHashIDs : MonoBehaviour
 	
 	// Added zombie.
 	public int neckBite;
-	
+	public int deadBiteBool;
+	public int dyingBiteState;
+	public int zombieEat;
+	public int eatingState;
+	public int bitingState;
+	public int dragPlayer;
 	
 	void Awake ()
 	{
@@ -37,6 +42,15 @@ public class DoneHashIDs : MonoBehaviour
 		openBool = Animator.StringToHash("Open");
 		
 		// Added zombie.
-		neckBite = Animator.StringToHash("neckbite");
+		neckBite = Animator.StringToHash("neckbite"); // zombie animator
+		zombieEat = Animator.StringToHash("eating"); // zombie animator
+		dragPlayer = Animator.StringToHash("crawling"); // zombie animator
+		bitingState = Animator.StringToHash("Base Layer.zombie_neck_bite"); // zombie animator
+		eatingState = Animator.StringToHash("Base Layer.ZombieEat"); // zombie animator
+
+		// Added player.
+		deadBiteBool = Animator.StringToHash("DeadFromBite"); // deadBool
+		dyingBiteState = Animator.StringToHash("Base Layer.DeathFromBite"); // dyingState
+
 	}
 }

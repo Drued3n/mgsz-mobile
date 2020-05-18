@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DoneSceneFadeInOut : MonoBehaviour
 {
-	public float fadeSpeed = 1.5f;			// Speed that the screen fades to and from black.
+	public float fadeSpeed = 5.5f;			// Speed that the screen fades to and from black.
 	
 	
 	private bool sceneStarting = true;		// Whether or not the scene is still fading in.

@@ -18,11 +18,6 @@ public class EnemyZombieSight : MonoBehaviour
 	private DoneHashIDs hash;							// Reference to the HashIDs.
 	private Vector3 previousSighting;					// Where the player was sighted last frame.
 	
-	// Zolbie
-	public bool canBite = true;
-	public int timesBit = 0;
-	public float timer = 0f;
-	
 	void Awake ()
 	{
 		// Setting up the references.
@@ -38,9 +33,9 @@ public class EnemyZombieSight : MonoBehaviour
 		// Set the personal sighting and the previous sighting to the reset position.
 		personalLastSighting = lastPlayerSighting.resetPosition;
 		previousSighting = lastPlayerSighting.resetPosition;
+		
 	}
-	
-	/*
+
 	void Update ()
 	{
 		// If the last global sighting of the player has changed...
@@ -51,6 +46,8 @@ public class EnemyZombieSight : MonoBehaviour
 		// Set the previous sighting to the be the sighting from this frame.
 		previousSighting = lastPlayerSighting.position;
 		
+		/*
+		// ADD EAT PLAYER HERE (for multiplayer).
 		// If the player is alive...
 		if(playerHealth.health > 0f)
 			// ... set the animator parameter to whether the player is in sight or not.
@@ -58,9 +55,11 @@ public class EnemyZombieSight : MonoBehaviour
 		else
 			// ... set the animator parameter to false.
 			anim.SetBool(hash.playerInSightBool, false);
+			*/
+			
+		
 	}
-	*/
-	/*
+
 	void OnTriggerStay (Collider other)
     {
 		// If the player has entered the trigger sphere...
@@ -107,8 +106,7 @@ public class EnemyZombieSight : MonoBehaviour
 			}
         }
     }
-	*/
-	/*
+
 	void OnTriggerExit (Collider other)
 	{
 		// If the player leaves the trigger zone...
@@ -116,8 +114,7 @@ public class EnemyZombieSight : MonoBehaviour
 			// ... the player is not in sight.
 			playerInSight = false;
 	}
-	*/
-	/*
+
 	float CalculatePathLength (Vector3 targetPosition)
 	{
 		// Create a path and set it based on a target position.
@@ -150,88 +147,5 @@ public class EnemyZombieSight : MonoBehaviour
 		}
 		
 		return pathLength;
-	}
-	*/
-	
-	void OnTriggerEnter (Collider other)
-	{
-		Debug.Log("Enter Trigger Collider");
-		canBite = true;
-	}
-	
-	void OnTriggerStay (Collider other)
-    {
-		Debug.Log("Stay Trigger Collider");
-		// If the player has entered the trigger sphere...
-        if(other.gameObject == player)
-        {
-			
-			Debug.Log("Player is in Trigger Collider");
-			
-			timer += Time.deltaTime;
-
-			// canBite = true;
-			//
-			if ( timer >= 3 && canBite && timesBit < 1)
-			// if(canBite)
-			{
-				
-				Debug.Log("Times up!");
-				
-				
-				Vector3 pos = (player.transform.position - transform.position).normalized;
-				
-				
-				transform.parent = player.transform;
-				
-				Vector3 desiredPos = new Vector3(player.transform.localPosition.x, player.transform.localPosition.y, player.transform.localPosition.z - 0.5f);
-				
-				// transform.position = Vector3.Lerp(transform.position, pos, 1f * Time.deltaTime);
-				transform.position = desiredPos;
-				Vector3 wPos = transform.TransformPoint(desiredPos);
-
-				transform.parent = null;
-				// transform.position = wPos;
-				
-
-				// transform.position = position.lookAt(player.transform.position);
-				//find the vector pointing from our position to the target
-				
-
-				//create the rotation we need to be in to look at the target
-				var _lookRotation = Quaternion.LookRotation(pos);
-
-				//rotate us over time according to speed until we are in the required rotation
-				transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 5f);
-				
-				// anim.SetBool(hash.neckBite, true);
-				anim.SetTrigger("Tneckbite");
-				
-				canBite = false;
-				timer = 0;
-				timesBit += 1;
-			}
-			
-			else
-			{
-				// anim.SetBool(hash.neckBite, false);
-				
-			}
-			
-			//
-			
-		}
-    }
-	
-	void OnTriggerExit (Collider other)
-	{
-		timer = 0f;
-		Debug.Log("Exited Trigger Collider");
-		// If the player leaves the trigger zone...
-		if(other.gameObject == player)
-			canBite = false;
-			timer = 0f;
-			// ... the player is not in sight.
-			playerInSight = false;
 	}
 }

@@ -7,7 +7,7 @@ public class EnemyZombieAnimation : MonoBehaviour
 	
 	
 	private Transform player;					// Reference to the player's transform.
-	private DoneEnemySight enemySight;			// Reference to the EnemySight script.
+	private EnemyZombieSight enemySight;			// Reference to the EnemySight script.
 	private UnityEngine.AI.NavMeshAgent nav;					// Reference to the nav mesh agent.
 	private Animator anim;						// Reference to the Animator.
 	private DoneHashIDs hash;					// Reference to the HashIDs script.
@@ -18,33 +18,38 @@ public class EnemyZombieAnimation : MonoBehaviour
 	{
 		// Setting up the references.
 		player = GameObject.FindGameObjectWithTag(DoneTags.player).transform;
-		enemySight = GetComponent<DoneEnemySight>();
+		enemySight = GetComponent<EnemyZombieSight>();
 		nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
 		anim = GetComponent<Animator>();
 		hash = GameObject.FindGameObjectWithTag(DoneTags.gameController).GetComponent<DoneHashIDs>();
 		
 		// Making sure the rotation is controlled by Mecanim.
-		nav.updateRotation = false;
+		// nav.updateRotation = false;
 		
 		// Creating an instance of the AnimatorSetup class and calling it's constructor.
-		animSetup = new DoneAnimatorSetup(anim, hash);
+		// animSetup = new DoneAnimatorSetup(anim, hash);
 		
 		// Set the weights for the shooting and gun layers to 1.
-		anim.SetLayerWeight(1, 1f);
-		anim.SetLayerWeight(2, 1f);
+		//anim.SetLayerWeight(1, 1f);
+		//anim.SetLayerWeight(2, 1f);
 		
 		// We need to convert the angle for the deadzone from degrees to radians.
-		deadZone *= Mathf.Deg2Rad;
+		// deadZone *= Mathf.Deg2Rad;
 	}
 	
 	
 	void Update () 
 	{
 		// Calculate the parameters that need to be passed to the animator component.
-		NavAnimSetup();
+		// NavAnimSetup();
+		
+		// Debug.Log(nav.velocity.magnitude);
+		var enemySpeed = nav.velocity.magnitude;
+		anim.SetFloat("speed", enemySpeed); 
 	}
 	
 	
+	/*
 	void OnAnimatorMove()
     {
 		// Set the NavMeshAgent's velocity to the change in position since the last frame, by the time it took for the last frame.
@@ -113,4 +118,5 @@ public class EnemyZombieAnimation : MonoBehaviour
 
 		return angle;
 	}
+	*/
 }
